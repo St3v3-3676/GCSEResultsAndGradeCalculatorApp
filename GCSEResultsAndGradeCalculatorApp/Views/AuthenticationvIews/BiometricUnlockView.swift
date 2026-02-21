@@ -1,3 +1,11 @@
+//
+//  BiometricUnlockView.swift
+//  GCSEResultsAndGradeCalculatorApp
+//
+//  Created by Stephen Boyle on 21/02/2026.
+//
+import SwiftUI
+
 struct BiometricUnlockView: View {
     @Environment(AuthenticationViewModel.self) private var auth
     @State private var isAuthenticating = false
@@ -15,8 +23,8 @@ struct BiometricUnlockView: View {
                 Task { await attemptUnlock() }
             } label: {
                 HStack(spacing: 8) {
-                    Image(systemName: "faceid")
-                    Text("Unlock with \(auth.biometryTypeStrings)")
+                    Image(systemName: auth.biometryImageName)
+                    Text(auth.biometryLabel)
                         .fontWeight(.semibold)
                 }
                 .frame(maxWidth: .infinity)
@@ -24,7 +32,13 @@ struct BiometricUnlockView: View {
             }
             .buttonStyle(.borderedProminent)
             .clipShape(RoundedRectangle(cornerRadius: 12))
-            .disabled(isAuthenticating)
+            .disabled(isAuthenticating || !auth.hasBiometrics)
+
+            if !auth.hasBiometrics {
+                Text(auth.biometryUnavailableMessage)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding()
     }
@@ -33,7 +47,7 @@ struct BiometricUnlockView: View {
     private func attemptUnlock() async {
         guard !isAuthenticating else { return }
         isAuthenticating = true
-        let success = await auth.authenticateWithBiometricsOnly()
+        let success = await auth.authenticateWithBiometrics()
         isAuthenticating = false
         if success {
             errorMessage = nil
@@ -42,4 +56,9 @@ struct BiometricUnlockView: View {
             errorMessage = "Authentication failed"
         }
     }
+}
+
+#Preview {
+    BiometricUnlockView()
+        .environment(AuthenticationViewModel())
 }

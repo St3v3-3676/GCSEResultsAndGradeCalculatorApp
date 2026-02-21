@@ -3,8 +3,6 @@
 //  GCSEGradesAndResultsApp
 //
 //  Created by Stephen Boyle on 17/02/2026.
-//
-
 import Foundation
 import Observation
 import AuthenticationServices
@@ -23,34 +21,61 @@ final class AuthenticationViewModel {
     @ObservationIgnored @AppStorage("storedEmail") private var storedEmail: String = ""
     @ObservationIgnored @AppStorage("userID") private var userID: String = ""
     @ObservationIgnored @AppStorage("biometricsEnabled") private var biometricsEnabledStorage: Bool = true
-    @ObservationIgnored var biometryTypeStrings = AuthenticationModel.BiometryTypeStrings.faceID
     @ObservationIgnored var sifnInWithAppleButtonWidth = AuthenticationModel.SignInWithAppleButtonSize.width
     @ObservationIgnored var sifnInWithAppleButtonHeight = AuthenticationModel.SignInWithAppleButtonSize.height
+    var isAppleIDConfigured: Bool = false
     
     var biometricsEnabled: Bool {
         get { biometricsEnabledStorage }
         set { biometricsEnabledStorage = newValue }
     }
 
+    var biometryLabel: String {
+        switch currentBiometryType() {
+        case .faceID:
+            return "Unlock with Face ID"
+        case .touchID:
+            return "Unlock with Touch ID"
+        default:
+            return "Unlock"
+        }
+    }
+
+    var biometryImageName: String {
+        switch currentBiometryType() {
+        case .faceID:
+            return "faceid"
+        case .touchID:
+            return "touchid"
+        default:
+            return "key.fill"
+        }
+    }
+
+    var hasBiometrics: Bool {
+        currentBiometryType() != .none
+    }
+
+    var biometryUnavailableMessage: String {
+        #if os(macOS)
+        return "Touch ID is unavailable. Enable Touch ID in System Settings > Touch ID & Password."
+        #else
+        return "Biometrics unavailable on this device"
+        #endif
+    }
+
     init() {
         self.username = storedName
         self.userEmail = storedEmail
         self.isAuthorized = false
-    }
-    
-    enum BiometryTypeStrings {
-        @ObservationIgnored static let faceID = "Unlock with Face ID"
-        @ObservationIgnored static let touchID = "Unlock with Touch ID"
-        @ObservationIgnored static let passcode = "Unlock with passcode"
-        @ObservationIgnored static let faceIDImageName = "faceid"
-        @ObservationIgnored static let touchIDImageName = "touchid"
-        @ObservationIgnored static let passcodeImageName = "key.fill"
+        self.isAppleIDConfigured = !userID.isEmpty
     }
     
     func onRequest(_ request: ASAuthorizationAppleIDRequest) {
         request.requestedScopes = [.fullName, .email]
     }
     
+    @MainActor
     func onCompletion(_ result: Result<ASAuthorization, Error>) {
         switch result {
         case .success(let authResults):
@@ -66,7 +91,9 @@ final class AuthenticationViewModel {
             userID = credential.user
             username = storedName
             userEmail = storedEmail
-            isAuthorized = true
+            isAuthorized = false
+            isUnlocked = false
+            isAppleIDConfigured = true
         case .failure(let error):
             print("Authorisation failed: \(error.localizedDescription)")
         }
@@ -83,8 +110,15 @@ final class AuthenticationViewModel {
             signOut()
             return
         }
+        isAppleIDConfigured = true
         await checkCredentialState()
-        isAuthorized = !userID.isEmpty
+        isAuthorized = isUnlocked
+    }
+
+    private func currentBiometryType() -> LABiometryType {
+        let context = LAContext()
+        _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        return context.biometryType
     }
     
     func signOut() {
@@ -95,6 +129,7 @@ final class AuthenticationViewModel {
         userEmail = ""
         isAuthorized = false
         isUnlocked = false
+        isAppleIDConfigured = false
     }
     
     func checkCredentialState() async {
@@ -106,10 +141,7 @@ final class AuthenticationViewModel {
                 switch state {
                 case .authorized:
                     Task { @MainActor in
-                        let success = await self.authenticateWithBiometrics()
-                        if !success {
-                            self.isUnlocked = false
-                        }
+                        self.isUnlocked = false
                         continuation.resume()
                     }
                     return
@@ -169,23 +201,33 @@ final class AuthenticationViewModel {
             return false
         }
     }
-}
 
-private struct RootContent: View {
-    @Environment(AuthenticationViewModel.self) private var auth
-
-    var body: some View {
-        Group {
-            if auth.isAuthorized {
-                ContentView()
-            } else {
-                SignInView()
-            }
+    // Biometrics-only flow for explicit user intent on the button.
+    @MainActor
+    func authenticateWithBiometricsOnly(reason: String = "Unlock your account") async -> Bool {
+        guard biometricsEnabled else {
+            isUnlocked = false
+            return false
         }
-        .task {
-            auth.startAutoSignIn()
+
+        let context = LAContext()
+        context.localizedCancelTitle = "Cancel"
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            do {
+                let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
+                isUnlocked = success
+                return success
+            } catch {
+                isUnlocked = false
+                return false
+            }
+        } else {
+            isUnlocked = false
+            return false
         }
     }
 }
- 
 
+
+ 
