@@ -1,0 +1,18 @@
+//
+//  iOSBackgroundView.swift
+//  GCSEResultsAndGradeCalculatorApp
+//
+//  Created by Stephen Boyle on 21/02/2026.
+//
+
+import SwiftUI
+
+struct iOSBackgroundView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+#Preview {
+    iOSBackgroundView()
+}
