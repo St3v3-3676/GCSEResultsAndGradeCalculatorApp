@@ -31,18 +31,39 @@ struct ViewLayoutModel {
         
         if isLandscape && device == .phone {
             return 1.5
-        }
-        
-        if !isLandscape && device == .phone {
+        }else if !isLandscape && device == .phone {
             return 1
         }
-
-        return 0.5
+        
+        if isLandscape && device == .pad {
+            return 1.5
+        } else if !isLandscape && device == .pad {
+            return 0.5
+        }
         #endif
         
-        #if os(macOS)
-        return 0.5
+        return 2
+
+    }
+    
+    static func setSignInWithAppleButtonSize(isLandscape: Bool) -> CGFloat {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        if isLandscape && device == .phone {
+            return 200
+        } else if !isLandscape && device == .phone {
+            return 200
+        }
+        
+        if isLandscape && device == .pad {
+            return 200
+        } else if !isLandscape && device == .pad {
+            return 200
+        }
+        
         #endif
+        return 400
+        
     }
 
     static func setButtonPosition(isLandscape: Bool) -> PositionDivider {

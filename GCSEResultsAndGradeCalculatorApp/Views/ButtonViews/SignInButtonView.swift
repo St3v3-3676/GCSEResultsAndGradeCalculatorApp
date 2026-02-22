@@ -3,6 +3,8 @@ import AuthenticationServices
 
 struct SignInButtonView: View {
     @Environment(AuthenticationViewModel.self) var authenticationViewModel
+    
+    var isLandscape: Bool
 
     var body: some View {
         SignInWithAppleButton(
@@ -10,14 +12,13 @@ struct SignInButtonView: View {
             onRequest: authenticationViewModel.onRequest,
             onCompletion: authenticationViewModel.onCompletion
         )
+        .frame(width: ViewLayoutModel.setSignInWithAppleButtonSize(isLandscape: isLandscape), height: ViewLayoutModel.buttonHeight)
         .signInWithAppleButtonStyle(.black)
-        .frame(width: AuthenticationModel.SignInWithAppleButtonSize.width, height: AuthenticationModel.SignInWithAppleButtonSize.height)
-        .frame(height: ViewLayoutModel.buttonHeight)
         .clipShape(RoundedRectangle(cornerRadius: ViewLayoutModel.cornerRadius))
     }
 }
 
 #Preview {
-    SignInButtonView()
+    SignInButtonView(isLandscape: false)
         .environment(AuthenticationViewModel())
 }

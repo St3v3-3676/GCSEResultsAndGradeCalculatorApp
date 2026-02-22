@@ -37,18 +37,6 @@ struct StyledButtonView: View {
                 Text(title)
             }
     }
-
-    // Factory that composes a fully-styled button using the label builder
-//    @ViewBuilder
-//    func primaryButton(title: String, systemImage: String, isLandscape: Bool, action: @escaping () -> Void) -> some View {
-//        Button(action: action) {
-//            buttonLabel(title: title, systemImage: systemImage, isLandscape: isLandscape)
-//        }
-//        .scaleEffect(ViewLayoutModel.setButtonScale(isLandscape: isLandscape))
-//        .buttonStyle(.glass)
-//        .shadow(color: .textColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
-//    }
-
     var body: some View {
         Button(action: action) {
             buttonLabel(title: title, systemImage: buttonImageName, isLandscape: isLandscape)
@@ -56,13 +44,7 @@ struct StyledButtonView: View {
         .scaleEffect(ViewLayoutModel.setButtonScale(isLandscape: isLandscape))
         .buttonStyle(.glass)
         .shadow(color: .textColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
-    }
-//        VStack(spacing: 16) {
-//            primaryButton(title: buttonLabel, systemImage: buttonImage, isLandscape: isLandscape) {
-//                // handle action
-//            }
-//        }
-    
+    }  
 }
 
 #Preview {

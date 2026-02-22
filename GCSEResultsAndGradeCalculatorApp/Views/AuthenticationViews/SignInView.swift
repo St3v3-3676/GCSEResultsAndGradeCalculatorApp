@@ -31,13 +31,14 @@ struct SignInView: View {
                 if isLandscape {
                     HStack {
                         LogoView(isLandscape: isLandscape)
-                        SignInButtonView()
+                        SignInButtonView(isLandscape: isLandscape)
+                            
                     }
                     .position(x: width / 2, y: height / 2)
                 } else {
                     VStack {
                         LogoView(isLandscape: isLandscape)
-                        SignInButtonView()
+                        SignInButtonView(isLandscape: isLandscape)
                     }
                     .position(x: width / 2, y: height / 2)
 
