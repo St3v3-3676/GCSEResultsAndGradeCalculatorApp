@@ -67,7 +67,15 @@ struct ViewLayoutModel {
 #if os(iOS)
         let device = UIDevice.current.userInterfaceIdiom
         if isLandscape && device == .phone {
-            return 0.35
+            return 200
+        } else if !isLandscape && device == .phone {
+            return 210
+        }
+        
+        if isLandscape && device == .pad {
+            return 200
+        } else if !isLandscape && device == .pad {
+            return 210
         }
 
         return 0.4

@@ -27,8 +27,22 @@ struct SignInView: View {
                 .position(x: width / ViewLayoutModel.setButtonPosition(isLandscape: isLandscape).xPosDivider, y: height / ViewLayoutModel.setButtonPosition(isLandscape: isLandscape).yPosDivider)
                 
             } else {
-                LogoView()
-                SignInButtonView(isLandscape: isLandscape, width: width / 2, height: height / 2)
+                //LogoView()
+                if isLandscape {
+                    HStack {
+                        LogoView(isLandscape: isLandscape)
+                        SignInButtonView()
+                    }
+                    .position(x: width / 2, y: height / 2)
+                } else {
+                    VStack {
+                        LogoView(isLandscape: isLandscape)
+                        SignInButtonView()
+                    }
+                    .position(x: width / 2, y: height / 2)
+
+                }
+                
             }
         }
         .animation(.easeInOut(duration: 0.25), value: authenticationViewModel.isAuthorized)

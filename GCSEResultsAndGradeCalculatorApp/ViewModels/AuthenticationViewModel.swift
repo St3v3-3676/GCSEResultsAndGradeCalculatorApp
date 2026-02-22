@@ -218,32 +218,6 @@ final class AuthenticationViewModel {
             return false
         }
     }
-
-    // Biometrics-only flow for explicit user intent on the button.
-//    @MainActor
-//    func authenticateWithBiometricsOnly(reason: String = "Unlock your account") async -> Bool {
-//        guard biometricsEnabled else {
-//            isUnlocked = false
-//            return false
-//        }
-//
-//        let context = LAContext()
-//        context.localizedCancelTitle = "Cancel"
-//
-//        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-//            do {
-//                let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
-//                isUnlocked = success
-//                return success
-//            } catch {
-//                isUnlocked = false
-//                return false
-//            }
-//        } else {
-//            isUnlocked = false
-//            return false
-//        }
-//    }
 }
 
 
