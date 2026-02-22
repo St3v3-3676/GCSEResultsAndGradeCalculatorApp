@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(AuthenticationViewModel.self) private var authenticationViewModel
+
     var body: some View {
-        VStack {
-            TabBarView()
+        Group {
+            if authenticationViewModel.isAuthorized {
+                TabBarView()
+            } else {
+                SignInView()
+            }
         }
-        .padding()
+        .animation(.easeInOut(duration: 0.25), value: authenticationViewModel.isAuthorized)
     }
 }
 

@@ -14,10 +14,16 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
 }
 
 #Preview {
     TabBarView()
+        .environment(AppSettingsViewModel())
 }

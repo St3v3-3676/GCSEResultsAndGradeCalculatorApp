@@ -16,13 +16,14 @@ final class AuthenticationViewModel {
     var isAuthorized: Bool = false
     //This represents the local unlock state
     var isUnlocked: Bool = false
+    var isAuthenticating = false
+    var errorMessage: String?
     
     @ObservationIgnored @AppStorage("storedName") private var storedName: String = ""
     @ObservationIgnored @AppStorage("storedEmail") private var storedEmail: String = ""
     @ObservationIgnored @AppStorage("userID") private var userID: String = ""
     @ObservationIgnored @AppStorage("biometricsEnabled") private var biometricsEnabledStorage: Bool = true
-    @ObservationIgnored var sifnInWithAppleButtonWidth = AuthenticationModel.SignInWithAppleButtonSize.width
-    @ObservationIgnored var sifnInWithAppleButtonHeight = AuthenticationModel.SignInWithAppleButtonSize.height
+
     var isAppleIDConfigured: Bool = false
     
     var biometricsEnabled: Bool {
@@ -69,6 +70,7 @@ final class AuthenticationViewModel {
         self.userEmail = storedEmail
         self.isAuthorized = false
         self.isAppleIDConfigured = !userID.isEmpty
+        self.errorMessage = nil
     }
     
     func onRequest(_ request: ASAuthorizationAppleIDRequest) {
@@ -157,6 +159,21 @@ final class AuthenticationViewModel {
             }
         }
     }
+
+    @MainActor
+    func attemptUnlock() async {
+        
+        guard !isAuthenticating else { return }
+        isAuthenticating = true
+        let success = await authenticateWithBiometrics()
+        isAuthenticating = false
+        if success {
+            errorMessage = nil
+            isAuthorized = true
+        } else {
+            errorMessage = "Authentication failed"
+        }
+    }
     
     //This method is used to perform biometric/passcode authentication
 
@@ -203,30 +220,30 @@ final class AuthenticationViewModel {
     }
 
     // Biometrics-only flow for explicit user intent on the button.
-    @MainActor
-    func authenticateWithBiometricsOnly(reason: String = "Unlock your account") async -> Bool {
-        guard biometricsEnabled else {
-            isUnlocked = false
-            return false
-        }
-
-        let context = LAContext()
-        context.localizedCancelTitle = "Cancel"
-
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            do {
-                let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
-                isUnlocked = success
-                return success
-            } catch {
-                isUnlocked = false
-                return false
-            }
-        } else {
-            isUnlocked = false
-            return false
-        }
-    }
+//    @MainActor
+//    func authenticateWithBiometricsOnly(reason: String = "Unlock your account") async -> Bool {
+//        guard biometricsEnabled else {
+//            isUnlocked = false
+//            return false
+//        }
+//
+//        let context = LAContext()
+//        context.localizedCancelTitle = "Cancel"
+//
+//        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+//            do {
+//                let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
+//                isUnlocked = success
+//                return success
+//            } catch {
+//                isUnlocked = false
+//                return false
+//            }
+//        } else {
+//            isUnlocked = false
+//            return false
+//        }
+//    }
 }
 
 

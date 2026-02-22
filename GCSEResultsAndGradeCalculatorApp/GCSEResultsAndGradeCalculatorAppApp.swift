@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct GCSEResultsAndGradeCalculatorAppApp: App {
     @State private var authenticationViewModel = AuthenticationViewModel()
+    @State private var appSettingsViewModel = AppSettingsViewModel()
     
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            ContentView()
                 .environment(authenticationViewModel)
+                .environment(appSettingsViewModel)
         }
         .windowResizability(.automatic)
      //   #if os(macOS)

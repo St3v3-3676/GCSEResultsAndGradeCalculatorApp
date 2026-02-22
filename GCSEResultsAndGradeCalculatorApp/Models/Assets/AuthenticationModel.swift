@@ -17,4 +17,6 @@ struct AuthenticationModel: Codable {
         static let width: CGFloat = 200
         static let height: CGFloat = 50
     }
+    
+    
 }
