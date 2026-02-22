@@ -20,6 +20,10 @@ struct TabBarView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .tabBarMinimizeBehavior(.automatic)
+        .tabViewStyle(.sidebarAdaptable)
+        
+        
     }
 }
 
