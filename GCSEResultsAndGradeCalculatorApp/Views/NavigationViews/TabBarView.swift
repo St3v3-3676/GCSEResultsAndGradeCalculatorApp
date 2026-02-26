@@ -19,6 +19,11 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+            
+            GradeBoundaryView()
+                .tabItem {
+                    Label("Grade Boundaries", systemImage: "pencil")
+                }
         }
         .tabBarMinimizeBehavior(.automatic)
         .tabViewStyle(.sidebarAdaptable)

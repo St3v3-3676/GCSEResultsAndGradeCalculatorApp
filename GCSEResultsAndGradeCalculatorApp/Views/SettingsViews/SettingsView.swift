@@ -5,6 +5,8 @@ struct SettingsView: View {
     @Environment(AppSettingsViewModel.self) private var settings
     @State private var showAuthFailedAlert = false
     @State private var pendingFaceIDValue: Bool? = nil
+    
+    @AppStorage("appColourScheme") var appColourScheme: String = "light"
 
     var body: some View {
         NavigationStack {

@@ -43,8 +43,8 @@ struct StyledButtonView: View {
         }
         .scaleEffect(ViewLayoutModel.setButtonScale(isLandscape: isLandscape))
         .buttonStyle(.glass)
-        .shadow(color: .textColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
-    }  
+        .shadow(color: .shadowColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
+    }
 }
 
 #Preview {

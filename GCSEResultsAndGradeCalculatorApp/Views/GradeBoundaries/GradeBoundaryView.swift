@@ -1,18 +1,18 @@
 //
-//  BiometricViewBackgroundView.swift
+//  GradeBoundaryView.swift
 //  GCSEResultsAndGradeCalculatorApp
 //
-//  Created by Stephen Boyle on 22/02/2026.
+//  Created by Stephen Boyle on 26/02/2026.
 //
 
 import SwiftUI
 
-struct BiometricViewBackgroundView: View {
+struct GradeBoundaryView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    BiometricViewBackgroundView()
+    GradeBoundaryView()
 }
