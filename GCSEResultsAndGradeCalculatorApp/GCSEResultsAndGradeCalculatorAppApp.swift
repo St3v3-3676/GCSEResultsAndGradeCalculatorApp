@@ -24,9 +24,9 @@ struct GCSEResultsAndGradeCalculatorAppApp: App {
                 )
         }
         .windowResizability(.automatic)
-     //   #if os(macOS)
-        .defaultSize(width: 900, height: 900)
-    //#endif
+        #if os(macOS)
+        //.defaultSize(width: 500, height: 1000)
+        #endif
 //        .defaultWindowPlacement { content, context in
 //                    let displayBounds = context.defaultDisplay.visibleRect
 //                    let size = content.sizeThatFits(.infinity)

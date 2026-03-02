@@ -9,17 +9,16 @@ import SwiftUI
 
 struct LogoView: View {
     var isLandscape: Bool
-    var imageScale: CGFloat
-    
+    var imageWidth: CGFloat
+    var imageHeight: CGFloat
     var body: some View {
         Image("AppLogo")
             .resizable()
-            .scaledToFit()
-            .scaleEffect(imageScale)
+            .frame(width: imageWidth, height: imageHeight)
             //.frame(width: ViewLayoutModel.setImageSize(isLandscape: isLandscape), height: ViewLayoutModel.setImageSize(isLandscape: isLandscape))
     }
 }
 
 #Preview {
-    LogoView(isLandscape: false, imageScale: 0.5)
+    LogoView(isLandscape: false, imageWidth: 100, imageHeight: 100)
 }

@@ -10,23 +10,24 @@ struct BiometricButtonView: View {
     @Environment(AuthenticationViewModel.self) private var authenticationViewModel
     
     let isLandscape: Bool
+    let width: CGFloat
 
     var body: some View {
-        VStack {
-            ErrorMessage()
+        ErrorMessage()
+        
+        StyledButtonView(
+            buttonLabel: authenticationViewModel.biometryLabel,
+            isLandscape: isLandscape,
+            title: authenticationViewModel.biometryLabel,
+            buttonImageName: authenticationViewModel.biometryImageName,
+            width: width,
+            action: {
+                Task { await authenticationViewModel.attemptUnlock() }
+            }
             
-            StyledButtonView(
-                buttonLabel: authenticationViewModel.biometryLabel,
-                isLandscape: isLandscape,
-                title: authenticationViewModel.biometryLabel,
-                buttonImageName: authenticationViewModel.biometryImageName,
-                action: {
-                    Task { await authenticationViewModel.attemptUnlock() }
-                }
-            )
-            
-            BiometricsUnavailableMessage()
-        }
+        )
+        
+        BiometricsUnavailableMessage()
     }
     
     @ViewBuilder
@@ -53,6 +54,6 @@ struct BiometricButtonView: View {
 }
 
 #Preview {
-    BiometricButtonView(isLandscape: false)
+    BiometricButtonView(isLandscape: false, width: 320)
         .environment(AuthenticationViewModel())
 }

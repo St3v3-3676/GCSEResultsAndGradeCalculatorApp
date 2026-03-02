@@ -12,7 +12,7 @@ struct SignInButtonView: View {
     var body: some View {
         VStack {
             Text("Welcome")
-                .font(ViewLayoutModel.fontSize.titleFont)
+                .font(ViewLayoutModel.titleFont)
             SignInWithAppleButton(
                 .signIn,
                 onRequest: authenticationViewModel.onRequest,

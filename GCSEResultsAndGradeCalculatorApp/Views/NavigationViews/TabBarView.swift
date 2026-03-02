@@ -15,14 +15,25 @@ struct TabBarView: View {
                     Label("Home", systemImage: "house")
                 }
 
-            SettingsView()
+            GradeCalculatorViews()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Grade Calculator", systemImage: "plus.forwardslash.minus")
                 }
+                .fontWeight(.bold)
             
             GradeBoundaryView()
                 .tabItem {
-                    Label("Grade Boundaries", systemImage: "pencil")
+                    Label("Grade Boundaries", systemImage: "9.square.fill")
+                }
+            
+            StudentResultsView()
+                .tabItem {
+                    Label("Student Results", systemImage: "graduationcap.fill")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
                 }
         }
         .tabBarMinimizeBehavior(.automatic)
@@ -35,4 +46,5 @@ struct TabBarView: View {
 #Preview {
     TabBarView()
         .environment(AppSettingsViewModel())
+        .environment(AuthenticationViewModel())
 }
