@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StyledButtonView: View {
+struct StyledButton: View {
     
     var buttonLabel: String
     var isLandscape: Bool
@@ -17,20 +17,6 @@ struct StyledButtonView: View {
     var action: () -> Void
     
     
-    // Reusable primary button style
-    struct PrimaryButtonStyle: ButtonStyle {
-        let isLandscape: Bool
-
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .background(
-                    RoundedRectangle(cornerRadius: ViewLayoutModel.cornerRadius, style: .continuous)
-                        .foregroundStyle(.clear)
-                )
-                .animation(.easeInOut(duration: 0.12), value: configuration.isPressed)
-        }
-    }
-
     // ViewBuilder-based label factory
     @ViewBuilder
     func buttonLabel(title: String, systemImage: String, isLandscape: Bool) -> some View {
@@ -64,7 +50,7 @@ struct StyledButtonView: View {
 }
 
 #Preview {
-    StyledButtonView(
+    StyledButton(
         buttonLabel: "Test",
         isLandscape: false,
         title: "Preview",
@@ -74,3 +60,4 @@ struct StyledButtonView: View {
         
     )
 }
+

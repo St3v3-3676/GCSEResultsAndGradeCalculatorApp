@@ -15,7 +15,7 @@ struct BiometricButtonView: View {
     var body: some View {
         ErrorMessage()
         
-        StyledButtonView(
+        StyledButton(
             buttonLabel: authenticationViewModel.biometryLabel,
             isLandscape: isLandscape,
             title: authenticationViewModel.biometryLabel,

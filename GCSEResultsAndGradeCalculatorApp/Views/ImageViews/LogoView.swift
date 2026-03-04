@@ -15,7 +15,6 @@ struct LogoView: View {
         Image("AppLogo")
             .resizable()
             .frame(width: imageWidth, height: imageHeight)
-            //.frame(width: ViewLayoutModel.setImageSize(isLandscape: isLandscape), height: ViewLayoutModel.setImageSize(isLandscape: isLandscape))
     }
 }
 

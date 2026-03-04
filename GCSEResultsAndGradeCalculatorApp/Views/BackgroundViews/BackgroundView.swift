@@ -21,13 +21,6 @@ struct BackgroundView: View {
                 colors: [
                     .gradientMiddleColour, .gradientBottomColour, .gradientMiddleColour,
                     .gradientBottomColour, .gradientMiddleColour.opacity(0.5), .gradientBottomColour, .gradientMiddleColour, .gradientBottomColour, .gradientMiddleColour])
-            .onAppear() {
-                withAnimation(.easeIn(duration: 5.0).repeatForever(autoreverses: true)) {
-                    isAnimating.toggle()
-                }
-            }
-            
-            
         }
         .background(Color.gradientBottomColour)
         .ignoresSafeArea()

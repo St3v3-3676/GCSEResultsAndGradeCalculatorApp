@@ -23,9 +23,10 @@ struct GCSEResultsAndGradeCalculatorAppApp: App {
                     appColorScheme == "dark" ? .dark : nil
                 )
         }
-        .windowResizability(.automatic)
         #if os(macOS)
-        //.defaultSize(width: 500, height: 1000)
+        .windowToolbarStyle(.unified)
+        .windowResizability(.automatic)
+        .defaultSize(width: 1000, height: 1000)
         #endif
 //        .defaultWindowPlacement { content, context in
 //                    let displayBounds = context.defaultDisplay.visibleRect

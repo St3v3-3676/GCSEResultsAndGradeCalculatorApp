@@ -55,16 +55,7 @@ struct SignInView: View {
                         SignInButtonView(isLandscape: isLandscape, width: width * buttonWidthScale, height: height * buttonHeightScale)
                         .position(x: width / appleButtonXPosition, y: height / appleButtonYPosition)
                     }
-
                 }
-                    
-            }
-                
-        }
-        .animation(.easeInOut(duration: 0.25), value: authenticationViewModel.isAuthorized)
-        .task {
-            if !authenticationViewModel.isPreview {
-                authenticationViewModel.startAutoSignIn()
             }
         }
     }
@@ -102,3 +93,4 @@ struct SignInView: View {
 //        .environment(vm)
 //}
 //
+

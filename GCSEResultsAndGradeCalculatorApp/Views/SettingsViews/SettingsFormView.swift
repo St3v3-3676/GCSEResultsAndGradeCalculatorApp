@@ -4,9 +4,6 @@ import LocalAuthentication
 struct SettingsFormView: View {
     @Environment(AppSettingsViewModel.self) private var settings
     @AppStorage("appColorScheme") private var appColorScheme: String = "system" // "light", "dark", or "system"
-    @Binding var showAuthFailedAlert: Bool
-    @Binding var pendingFaceIDValue: Bool?
-    let confirmChangingFaceID: (Bool) async -> Void
 
     var body: some View {
         Form {
@@ -39,22 +36,10 @@ struct SettingsFormView: View {
                 
             }
         }
-        .alert("Authentication Failed", isPresented: $showAuthFailedAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Face ID verification is required to change this setting.")
-        }
     }
 }
 
 #Preview {
-    @Previewable @State var showAuthFailedAlert = false
-    @Previewable @State var pendingFaceIDValue: Bool? = nil
-
-    return SettingsFormView(
-        showAuthFailedAlert: $showAuthFailedAlert,
-        pendingFaceIDValue: $pendingFaceIDValue,
-        confirmChangingFaceID: { _ in }
-    )
-    .environment(AppSettingsViewModel())
+    SettingsFormView()
+        .environment(AppSettingsViewModel())
 }

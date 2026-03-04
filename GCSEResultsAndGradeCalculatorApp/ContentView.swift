@@ -18,11 +18,11 @@ struct ContentView: View {
                 SignInView()
             }
         }
-        .animation(.easeInOut(duration: 0.25), value: authenticationViewModel.isAuthorized)
     }
 }
 
 #Preview {
     ContentView()
         .environment(AuthenticationViewModel())
+        .environment(AppSettingsViewModel())
 }

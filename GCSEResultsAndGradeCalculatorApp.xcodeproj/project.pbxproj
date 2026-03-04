@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		F73697E42F49A78500E9D0F7 /* GCSEResultsAndGradeCalculatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GCSEResultsAndGradeCalculatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F73697E42F49A78500E9D0F7 /* Grade Calculator and Results.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grade Calculator and Results.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		F73697E52F49A78500E9D0F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F73697E42F49A78500E9D0F7 /* GCSEResultsAndGradeCalculatorApp.app */,
+				F73697E42F49A78500E9D0F7 /* Grade Calculator and Results.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			packageProductDependencies = (
 			);
 			productName = GCSEResultsAndGradeCalculatorApp;
-			productReference = F73697E42F49A78500E9D0F7 /* GCSEResultsAndGradeCalculatorApp.app */;
+			productReference = F73697E42F49A78500E9D0F7 /* Grade Calculator and Results.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -261,6 +261,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Grade Calculator and Results";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Used to provide secure access to the app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -278,7 +280,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = SJBSoftwareSolutions.GCSEResultsAndGradeCalculatorApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Grade Calculator and Results";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -310,6 +312,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Grade Calculator and Results";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Used to provide secure access to the app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -327,7 +331,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = SJBSoftwareSolutions.GCSEResultsAndGradeCalculatorApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Grade Calculator and Results";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

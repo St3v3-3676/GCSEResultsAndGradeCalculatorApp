@@ -2,49 +2,51 @@
 //  TabBarView.swift
 //  GCSEResultsAndGradeCalculatorApp
 //
-//  Created by Stephen Boyle on 21/02/2026.
+//  Created by Stephen Boyle on 03/03/2026.
 //
 
 import SwiftUI
 
 struct TabBarView: View {
     var body: some View {
-        TabView {
-            Text("Home")
-                .tabItem {
-                    Label("Home", systemImage: "house")
+        ZStack {
+            Spacer()
+            
+            TabView {
+                TabBarItem(title: "Home", systemImage: "house.fill") {
+                    HomeView()
+                }
+                
+                TabBarItem(title: "Calculator", imageName: "calculate") {
+                    GradeCalculatorView()
                 }
 
-            GradeCalculatorViews()
-                .tabItem {
-                    Label("Grade Calculator", systemImage: "plus.forwardslash.minus")
-                }
-                .fontWeight(.bold)
             
-            GradeBoundaryView()
-                .tabItem {
-                    Label("Grade Boundaries", systemImage: "9.square.fill")
+                TabBarItem(title: "Boundaries", systemImage: "9.square.fill") {
+                    GradeBoundaryView()
                 }
-            
-            StudentResultsView()
-                .tabItem {
-                    Label("Student Results", systemImage: "graduationcap.fill")
+                
+                TabBarItem(title: "Results", systemImage: "chart.bar.fill") {
+                    StudentResultsView()
                 }
-            
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gear")
+                
+                TabBarItem(title: "Settings", systemImage: "gear") {
+                    SettingsView()
                 }
+            }
+            .tabViewStyle(.sidebarAdaptable)
+            #if os(macOS)
+            .toolbarBackground(.clear, for: .windowToolbar)
+            #endif
+            .toolbarTitleDisplayMode(.inline)
+            .navigationTitle("Home")
         }
-        .tabBarMinimizeBehavior(.automatic)
-        .tabViewStyle(.sidebarAdaptable)
-        
-        
+        .background(BackgroundView())
+        .tint(.textColour)
     }
 }
 
 #Preview {
     TabBarView()
         .environment(AppSettingsViewModel())
-        .environment(AuthenticationViewModel())
 }

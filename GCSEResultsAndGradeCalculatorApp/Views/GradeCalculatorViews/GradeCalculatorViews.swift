@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct GradeCalculatorViews: View {
+struct GradeCalculatorView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Grade Calculator")
     }
 }
 
 #Preview {
-    GradeCalculatorViews()
+    GradeCalculatorView()
 }

@@ -4,6 +4,7 @@
 //
 //  Created by Stephen Boyle on 17/02/2026.
 import Foundation
+import Security
 import Observation
 import AuthenticationServices
 import LocalAuthentication
@@ -33,7 +34,6 @@ final class AuthenticationViewModel {
     @ObservationIgnored @AppStorage("storedEmail") private var storedEmail: String = ""
     @ObservationIgnored @AppStorage("userID") private var userID: String = ""
     @ObservationIgnored @AppStorage("biometricsEnabled") private var biometricsEnabledStorage: Bool = true
-    @ObservationIgnored @AppStorage("passcodeHash") private var passcodeHash: String = "" // simplistic placeholder
 
     var isAppleIDConfigured: Bool = false
 
@@ -99,17 +99,6 @@ final class AuthenticationViewModel {
         case .failure(let error):
             print("Authorisation failed: \(error.localizedDescription)")
             errorMessage = error.localizedDescription
-        }
-    }
-
-    @MainActor
-    func startAutoSignIn() {
-        guard !isPreview else { return }
-        if biometricsEnabled && isBiometricAvailable {
-            step = .biometricInProgress
-            Task { await attemptUnlock() }
-        } else {
-            step = .idle
         }
     }
 
@@ -184,60 +173,22 @@ final class AuthenticationViewModel {
     @MainActor
     func authenticateWithBiometrics(reason: String = "Unlock your account") async -> Bool {
         guard biometricsEnabled else { isUnlocked = false; return false }
-        let bioOnlyContext = LAContext()
-        bioOnlyContext.localizedCancelTitle = "Cancel"
-        if bioOnlyContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+        let context = LAContext()
+        context.localizedCancelTitle = "Cancel"
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
             do {
-                let bioSuccess = try await bioOnlyContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
-                if bioSuccess { isUnlocked = true; return true }
-            } catch { /* fall through */ }
+                let success = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
+                if success {
+                    isUnlocked = true
+                    return true
+                }
+            } catch {
+                // User cancel or failure will fall through
+            }
         }
-        let fallbackContext = LAContext()
-        fallbackContext.localizedCancelTitle = "Cancel"
-        if fallbackContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
-            do {
-                let fallbackSuccess = try await fallbackContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
-                isUnlocked = fallbackSuccess
-                return fallbackSuccess
-            } catch { isUnlocked = false; return false }
-        } else {
-            isUnlocked = false
-            return false
-        }
-    }
-
-    // MARK: - Passcode (simple placeholder logic)
-    func authenticateWithPasscode(_ passcode: String) async -> Bool {
-        step = .signingIn
-        defer { if !isAuthorized { step = .passcodeEntry } }
-        // WARNING: placeholder comparison, replace with Keychain-secured hash compare
-        if !passcodeHash.isEmpty && passcodeHash == passcode {
-            isAuthorized = true
-            errorMessage = nil
-            step = .idle
-            return true
-        } else {
-            isAuthorized = false
-            errorMessage = "Incorrect passcode"
-            return false
-        }
-    }
-
-    // MARK: - Email & Password (stub)
-    func authenticateWithEmail(email: String, password: String) async -> Bool {
-        step = .signingIn
-        // Replace with real backend auth. This is a stub for demo purposes.
-        try? await Task.sleep(nanoseconds: 400_000_000)
-        if !email.isEmpty && !password.isEmpty {
-            isAuthorized = true
-            errorMessage = nil
-            step = .idle
-            return true
-        } else {
-            isAuthorized = false
-            errorMessage = "Please enter a valid email and password"
-            step = .emailPasswordEntry
-            return false
-        }
+        isUnlocked = false
+        return false
     }
 }
+
+
