@@ -48,8 +48,8 @@ final class AuthenticationViewModel {
 
     var biometryLabel: String {
         switch currentBiometryType() {
-        case .faceID: return "Unlock with \n Face ID"
-        case .touchID: return "Use Touch ID"
+        case .faceID: return "Unlock with Face ID"
+        case .touchID: return "Unlock with Touch ID"
         default: return "Unlock"
         }
     }

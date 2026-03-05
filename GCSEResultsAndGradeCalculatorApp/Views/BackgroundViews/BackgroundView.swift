@@ -8,26 +8,32 @@
 import SwiftUI
 
 struct BackgroundView: View {
-    @State var isAnimating = false
+    @State private var isAnimating = false
     
     var body: some View {
-        VStack{
+        VStack {
             MeshGradient(
-                width: 3,
-                height:3,
-                points: [.init(0,0),.init(0.5,0),.init(1,0),
-                         .init(0,0.5),.init(0.5,0.5),.init(1,0.5),
-                         .init(0,1),.init(0.5,1),.init(1,1)],
+                width: 2,
+                height: 2,
+                points: [[0, 0], [1, 0],
+                         [0, isAnimating ? 0.4:1.5], [1, isAnimating ? 0.4:1.5]
+                ],
                 colors: [
-                    .gradientMiddleColour, .gradientBottomColour, .gradientMiddleColour,
-                    .gradientBottomColour, .gradientMiddleColour.opacity(0.5), .gradientBottomColour, .gradientMiddleColour, .gradientBottomColour, .gradientMiddleColour])
+                    .gradientMiddleColour, .gradientMiddleColour,
+                    .gradientBottomColour, .gradientBottomColour
+                ]
+            )
         }
-        .background(Color.gradientBottomColour)
+        .background(.gradientBottomColour)
         .ignoresSafeArea()
+        .onAppear {
+            withAnimation(.easeInOut(duration: 5.0).repeatForever(autoreverses: true)) {
+                isAnimating.toggle()
+            }
+        }
     }
 }
 
 #Preview {
     BackgroundView()
 }
-

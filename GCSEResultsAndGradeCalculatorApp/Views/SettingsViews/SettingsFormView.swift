@@ -6,34 +6,36 @@ struct SettingsFormView: View {
     @AppStorage("appColorScheme") private var appColorScheme: String = "system" // "light", "dark", or "system"
 
     var body: some View {
-        Form {
-            Section("Security") {
-                Button {
-                    #if os(iOS)
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
+        GeometryReader { geometry in
+            Form {
+                Section("Security") {
+                    Button {
+#if os(iOS)
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+#endif
+                    } label: {
+                        HStack {
+                            Image(systemName: "gear")
+                            Text("Open Settings")
+                        }
                     }
-                    #endif
-                } label: {
-                    HStack {
-                        Image(systemName: "gear")
-                        Text("Open Settings")
-                    }
+                    Text("To turn Face ID off, open Settings > Face ID & Passcode and disable Face ID for your device or for this app.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
                 }
-                Text("To turn Face ID off, open Settings > Face ID & Passcode and disable Face ID for your device or for this app.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-
-            Section("Appearance") {
-                Picker("Appearance", selection: $appColorScheme) {
-                    Text("System").tag("system")
-                    Text("Light").tag("light")
-                    Text("Dark").tag("dark")
-                }
-                .pickerStyle(.segmented)
-                .glassEffect()
                 
+                Section("Appearance") {
+                    Picker("Appearance", selection: $appColorScheme) {
+                        Text("System").tag("system")
+                        Text("Light").tag("light")
+                        Text("Dark").tag("dark")
+                    }
+                    .pickerStyle(.segmented)
+                    .glassEffect()
+                    
+                }
             }
         }
     }

@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
@@ -18,78 +18,22 @@
             endingLineNumber = "25"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6 - eb443be1379d8421"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Grade_Calculator_and_Results.BiometricButtonView.body.getter : some"
-                  moduleName = "Grade Calculator and Results.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/stephenboyle/Library/Mobile%20Documents/com~apple~CloudDocs/App%20Projects/GCSEResultsAndGradeCalculatorApp/GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-               <Location
-                  uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6 - ada83b543bd562e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () async -&gt; () in closure #1 () -&gt; () in Grade_Calculator_and_Results.BiometricButtonView.body.getter : some"
-                  moduleName = "Grade Calculator and Results.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/stephenboyle/Library/Mobile%20Documents/com~apple~CloudDocs/App%20Projects/GCSEResultsAndGradeCalculatorApp/GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-               <Location
-                  uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6 - 271655ba1f4230d5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in closure #1 () -&gt; () in Grade_Calculator_and_Results.BiometricButtonView.body.getter : some"
-                  moduleName = "Grade Calculator and Results.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/stephenboyle/Library/Mobile%20Documents/com~apple~CloudDocs/App%20Projects/GCSEResultsAndGradeCalculatorApp/GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-               <Location
-                  uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6 - a7690e501a8947f2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in closure #1 () -&gt; () in Grade_Calculator_and_Results.BiometricButtonView.body.getter : some"
-                  moduleName = "Grade Calculator and Results.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/stephenboyle/Library/Mobile%20Documents/com~apple~CloudDocs/App%20Projects/GCSEResultsAndGradeCalculatorApp/GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-               <Location
-                  uuid = "20F0BE3F-ADBD-4898-9B3A-3E946E2572A6 - c4bff9fb11b74d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in closure #1 () -&gt; () in Grade_Calculator_and_Results.BiometricButtonView.body.getter : some"
-                  moduleName = "Grade Calculator and Results.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/stephenboyle/Library/Mobile%20Documents/com~apple~CloudDocs/App%20Projects/GCSEResultsAndGradeCalculatorApp/GCSEResultsAndGradeCalculatorApp/Views/ButtonViews/BiometricButtonView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BFF9F1C5-FF0D-41A3-A443-A99008C366C7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GCSEResultsAndGradeCalculatorApp/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "ContentView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

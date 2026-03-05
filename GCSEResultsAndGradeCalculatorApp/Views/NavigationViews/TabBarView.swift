@@ -8,29 +8,30 @@
 import SwiftUI
 
 struct TabBarView: View {
+    
     var body: some View {
+        let tabTitles = ViewStringsModel.getTabTitles()
         ZStack {
             Spacer()
-            
             TabView {
-                TabBarItem(title: "Home", systemImage: "house.fill") {
+                TabBarItem(title: tabTitles[0], systemImage: ViewStringsModel.systemImageName.homeImage) {
                     HomeView()
                 }
                 
-                TabBarItem(title: "Calculator", imageName: "calculate") {
+                TabBarItem(title: tabTitles[1], imageName: "calculate") {
                     GradeCalculatorView()
                 }
 
             
-                TabBarItem(title: "Boundaries", systemImage: "9.square.fill") {
+                TabBarItem(title: tabTitles[2], systemImage: ViewStringsModel.systemImageName.gradeBoundariesImage) {
                     GradeBoundaryView()
                 }
                 
-                TabBarItem(title: "Results", systemImage: "chart.bar.fill") {
+                TabBarItem(title: tabTitles[3], systemImage: ViewStringsModel.systemImageName.studentResultsImage) {
                     StudentResultsView()
                 }
                 
-                TabBarItem(title: "Settings", systemImage: "gear") {
+                TabBarItem(title: tabTitles[4], systemImage: ViewStringsModel.systemImageName.settingsImage) {
                     SettingsView()
                 }
             }
@@ -50,3 +51,4 @@ struct TabBarView: View {
     TabBarView()
         .environment(AppSettingsViewModel())
 }
+

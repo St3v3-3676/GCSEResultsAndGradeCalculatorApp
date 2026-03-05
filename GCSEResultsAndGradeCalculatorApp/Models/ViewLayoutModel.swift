@@ -90,7 +90,7 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
-        return 2
+        return 0.2
         #endif
     }
     
@@ -115,7 +115,7 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
-        return 1
+        return 0.08
         #endif
     }
     
@@ -140,7 +140,7 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
-        return 1
+        return 2
         #endif
     }
     
@@ -165,7 +165,7 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
-        return 1
+        return 1.4
         #endif
     }
     
@@ -174,9 +174,9 @@ struct ViewLayoutModel {
         let device = UIDevice.current.userInterfaceIdiom
         
         if isLandscape && device == .phone {
-            return 2
+            return 1.8
         }else if !isLandscape && device == .phone {
-            return 1.5
+            return 1.8
         }
         
         if isLandscape && device == .pad {
@@ -190,7 +190,31 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
+        return 1.7
+        #endif
+    }
+    static func setBiometricButtonXPosition(isLandscape: Bool) -> CGFloat {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if isLandscape && device == .phone {
+            return 1.5
+        }else if !isLandscape && device == .phone {
+            return 2
+        }
+        
+        if isLandscape && device == .pad {
+            return 1.5
+        } else if !isLandscape && device == .pad {
+            return 2
+        }
+        
+        // Default scale for any other iOS cases
         return 1
+        #endif
+        
+        #if os(macOS)
+        return 2
         #endif
     }
     
@@ -199,7 +223,7 @@ struct ViewLayoutModel {
         let device = UIDevice.current.userInterfaceIdiom
         
         if isLandscape && device == .phone {
-            return 3
+            return 3.4
         }else if !isLandscape && device == .phone {
             return 2
         }
@@ -226,13 +250,13 @@ struct ViewLayoutModel {
         if isLandscape && device == .phone {
             return 2
         }else if !isLandscape && device == .phone {
-            return 3
+            return 2.7
         }
         
         if isLandscape && device == .pad {
             return 2
         } else if !isLandscape && device == .pad {
-            return 3
+            return 2.5
         }
         
         // Default scale for any other iOS cases
@@ -240,7 +264,7 @@ struct ViewLayoutModel {
         #endif
         
         #if os(macOS)
-        return 2.5
+        return 2.9
         #endif
     }
     
@@ -249,15 +273,15 @@ struct ViewLayoutModel {
         let device = UIDevice.current.userInterfaceIdiom
         
         if isLandscape && device == .phone {
-            return 0.2
+            return 0.4
         } else if !isLandscape && device == .phone {
-            return 2
+            return 0.8
         }
         
         if isLandscape && device == .pad {
-            return 0.2
+            return 0.6
         } else if !isLandscape && device == .pad {
-            return 0.4
+            return 0.6
         }
         
         return 2
@@ -274,7 +298,7 @@ struct ViewLayoutModel {
         let device = UIDevice.current.userInterfaceIdiom
         
         if isLandscape && device == .phone {
-            return 0.12
+            return 2
         }else if !isLandscape && device == .phone {
             return 2
         }

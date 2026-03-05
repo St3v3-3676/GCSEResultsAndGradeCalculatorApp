@@ -15,6 +15,7 @@ struct LogoView: View {
         Image("AppLogo")
             .resizable()
             .frame(width: imageWidth, height: imageHeight)
+            .shadow(color: .shadowColour, radius: 50)
     }
 }
 

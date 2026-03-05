@@ -43,7 +43,7 @@ struct StyledButton: View {
         Button(action: action) {
             buttonLabel(title: title, systemImage: buttonImageName, isLandscape: isLandscape)
         }
-//        .frame(width: width)
+        .frame(width: width)
         .buttonStyle(.glass)
         .shadow(color: .shadowColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
     }
