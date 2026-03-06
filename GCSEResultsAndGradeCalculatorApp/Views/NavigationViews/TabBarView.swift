@@ -30,10 +30,11 @@ struct TabBarView: View {
                 TabBarItem(title: tabTitles[3], systemImage: ViewStringsModel.systemImageName.studentResultsImage) {
                     StudentResultsView()
                 }
-                
+                #if os(iOS)
                 TabBarItem(title: tabTitles[4], systemImage: ViewStringsModel.systemImageName.settingsImage) {
                     SettingsView()
                 }
+                #endif
             }
             .tabViewStyle(.sidebarAdaptable)
             #if os(macOS)

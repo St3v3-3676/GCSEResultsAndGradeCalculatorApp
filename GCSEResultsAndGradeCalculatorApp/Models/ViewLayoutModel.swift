@@ -334,5 +334,48 @@ struct ViewLayoutModel {
         return .largeTitle
         #endif
     }
+    
+    static func setSecuritySettingsPosition(isLandscape: Bool) -> [CGFloat] {
+        var position: [CGFloat] = []
+        
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if isLandscape && device == .phone {
+            position.append(2)
+            position.append(2)
+            
+            return position
+        }else if !isLandscape && device == .phone {
+            position.append(2)
+            position.append(2)
+            
+            return position
+        }
+
+        if isLandscape && device == .pad {
+            position.append(2)
+            position.append(2)
+            
+            return position
+        } else if !isLandscape && device == .pad {
+            position.append(2)
+            position.append(2)
+            
+            return position
+        }
+
+// Default scale for any other iOS cases
+        position.append(2)
+        position.append(2)
+        return position
+        #endif
+
+        #if os(macOS)
+        position.append(2)
+        position.append(2)
+        return position
+        #endif
+    }
 }
 

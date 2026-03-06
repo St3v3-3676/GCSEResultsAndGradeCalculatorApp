@@ -28,17 +28,16 @@ struct GCSEResultsAndGradeCalculatorAppApp: App {
         .windowResizability(.automatic)
         .defaultSize(width: 1000, height: 1000)
         #endif
-//        .defaultWindowPlacement { content, context in
-//                    let displayBounds = context.defaultDisplay.visibleRect
-//                    let size = content.sizeThatFits(.infinity)
-//                    let verticalOffset: CGFloat = 140
-//                    
-//                    // The system places the window 140 points from the bottom of the screen.
-//                    let position = CGPoint(
-//                        x: displayBounds.midX - (size.width / 2),
-//                        y: displayBounds.maxY - size.height - verticalOffset)
-//            return WindowPlacement(position, size: size)
-//        }
-
+        
+        #if os(macOS)
+        
+        Settings {
+            MacOSSettingsView()
+                .environment(appSettingsViewModel)
+        }
+        .windowResizability(.automatic)
+        
+        
+        #endif
     }
 }
