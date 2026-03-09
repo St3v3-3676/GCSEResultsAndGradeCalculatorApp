@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct StyledButton: View {
+    @Environment(\.colorScheme) private var colorScheme
     
     var buttonLabel: String
     var isLandscape: Bool
     var title: String
     var buttonImageName: String
     var width: CGFloat
+    var height: CGFloat
     var action: () -> Void
     
     
@@ -21,34 +23,32 @@ struct StyledButton: View {
     @ViewBuilder
     func buttonLabel(title: String, systemImage: String, isLandscape: Bool) -> some View {
         
-
+        
         Image(systemName: systemImage)
-            .font(.title)
-            .fontWeight(.bold)
+            .font(.title.bold())
             .multilineTextAlignment(.center)
-            .lineLimit(nil) // allow wrapping
-//            .minimumScaleFactor(0.8) // don’t scale down; prefer wrapping
-            .fixedSize(horizontal: false, vertical: true) // grow vertically if needed
-
+            .lineLimit(nil)
+            .fixedSize(horizontal: false, vertical: true)
+        
         
         Text(title)
             .font(.title2)
             .multilineTextAlignment(.center)
-            .lineLimit(nil) // allow wrapping
-//            .minimumScaleFactor(0.8) // don’t scale down; prefer wrapping
+            .lineLimit(nil)
             .fixedSize(horizontal: false, vertical: true) // grow vertically if needed
-
+        
     }
     var body: some View {
-        Button(action: action) {
-            buttonLabel(title: title, systemImage: buttonImageName, isLandscape: isLandscape)
+        Shadow {
+            Button(action: action) {
+                buttonLabel(title: title, systemImage: buttonImageName, isLandscape: isLandscape)
+            }
+            .frame(width: width, height: height)
+            .buttonStyle(.glass)
+            .foregroundStyle(.primary)
         }
-        .frame(width: width)
-        .buttonStyle(.glass)
-        .shadow(color: .shadowColour, radius: ViewLayoutModel.shadowRadius, x: ViewLayoutModel.shadowXOffset, y: ViewLayoutModel.shadowYOffset)
     }
 }
-
 #Preview {
     StyledButton(
         buttonLabel: "Test",
@@ -56,6 +56,7 @@ struct StyledButton: View {
         title: "Preview",
         buttonImageName: "house",
         width: 400,
+        height: 50,
         action: {}
         
     )

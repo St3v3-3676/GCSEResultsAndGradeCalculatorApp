@@ -37,7 +37,6 @@ struct GCSEResultsAndGradeCalculatorAppApp: App {
         }
         .windowResizability(.automatic)
         
-        
         #endif
     }
 }

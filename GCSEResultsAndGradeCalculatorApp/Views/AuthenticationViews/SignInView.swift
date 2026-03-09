@@ -15,69 +15,97 @@ struct SignInView: View {
             let width = geometry.size.width
             let height = geometry.size.height
             let isLandscape = width > height
-
+            let logoPosition = getLogoPosition(isLandscape: isLandscape)
+            let appleButtonPosition = getAppleButtonPosition(isLandscape: isLandscape)
+            
             if authenticationViewModel.isAppleIDConfigured {
                 ZStack {
-                    LogoView(
-                        isLandscape: isLandscape,
-                        imageWidth: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape),
-                        imageHeight: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape))
-                        .position(
-                            x: width / ViewLayoutModel.setLogoXPosition(isLandscape: isLandscape),
-                            y: height / ViewLayoutModel.setLogoYPosition(isLandscape: isLandscape))
-        
+                    LogoView()
+                    .position(
+                        x: width / logoPosition[0],
+                        y: height / logoPosition[1])
+                    
                     BiometricButtonView(
-                        isLandscape: isLandscape,
-                        width: width * ViewLayoutModel.setBiometricButtonWidthScale(isLandscape: isLandscape))
-                        .position(
-                            x: width / ViewLayoutModel.setBiometricButtonXPosition(isLandscape: isLandscape),
-                            y: height / ViewLayoutModel.setBiometricButtonYPosition(isLandscape: isLandscape))
-
+                        isLandscape: isLandscape, width: width, height: height)
+                    .position(
+                        x: width / getBiometricButtonPosition(isLandscape: isLandscape)[0],
+                        y: height / getBiometricButtonPosition(isLandscape: isLandscape)[1])
+                    
                 }
-                .background(BackgroundView())
+                .background(LoginBackground())
             } else {
-                if isLandscape {
                     ZStack {
-                        LogoView(
-                            isLandscape: isLandscape,
-                            imageWidth: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape),
-                            imageHeight: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape))
-                            .position(
-                                x: width / ViewLayoutModel.setLogoXPosition(isLandscape: isLandscape),
-                                y: height / ViewLayoutModel.setLogoYPosition(isLandscape: isLandscape))
+                        LogoView()
+                        .position(
+                            x: width / logoPosition[0],
+                            y: height / logoPosition[1])
                         
                         SignInButtonView(
                             isLandscape: isLandscape,
-                            width: width * ViewLayoutModel.setButtonWidthScale(isLandscape: isLandscape),
-                            height: height * ViewLayoutModel.setButtonHeightScale(isLandscape: isLandscape))
-                            .position(
-                            x: width / ViewLayoutModel.setAppleButtonXPosition(isLandscape: isLandscape),
-                            y: height / ViewLayoutModel.setAppleButtonYPosition(isLandscape: isLandscape))
+                            width: width,
+                            height: height)
+                        .position(
+                            x: width / appleButtonPosition[0],
+                            y: height / appleButtonPosition[1])
                     }
-                    .background(BackgroundView())
-                } else {
-                    ZStack {
-                        BackgroundView()
-                        
-                        LogoView(
-                            isLandscape: isLandscape,
-                            imageWidth: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape),
-                            imageHeight: width / ViewLayoutModel.getLogoSize(isLandscape: isLandscape))
-                            .position(
-                                x: width / ViewLayoutModel.setLogoXPosition(isLandscape: isLandscape),
-                                y: height / ViewLayoutModel.setLogoYPosition(isLandscape: isLandscape))
-                        
-                        SignInButtonView(
-                            isLandscape: isLandscape,
-                            width: width * ViewLayoutModel.setButtonWidthScale(isLandscape: isLandscape),
-                            height: height * ViewLayoutModel.setButtonHeightScale(isLandscape: isLandscape))
-                            .position(
-                                x: width / ViewLayoutModel.setAppleButtonXPosition(isLandscape: isLandscape),
-                                y: height / ViewLayoutModel.setAppleButtonYPosition(isLandscape: isLandscape))
-                    }
-                }
+                    .background(LoginBackground())
             }
         }
+    }
+    
+    func getBiometricButtonPosition(isLandscape: Bool) -> [CGFloat] {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if device == .phone {
+            return isLandscape ? [1.5,1.8] : [2,1.65]
+        } else if device == .pad {
+            return isLandscape ? [1.5,2] : [2,1.6]
+        } else {
+            return [1.5,1.8]
+        }
+        #endif
+        
+        #if os(macOS)
+        let biometricButtonPosition: [CGFloat] = [2,1.7]
+        return biometricButtonPosition
+        #endif
+    }
+    
+    func getLogoPosition(isLandscape: Bool) -> [CGFloat] {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if device == .phone {
+            return isLandscape ? [3.4,2] : [2,2.5]
+        } else if device == .pad {
+            return isLandscape ? [3,2] : [2,2.5]
+        } else {
+            return [1,1.4]
+        }
+        #endif
+        
+        #if os(macOS)
+        return [2,2.5]
+        #endif
+    }
+        
+    func getAppleButtonPosition(isLandscape: Bool) -> [CGFloat] {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if device == .phone {
+            return isLandscape ? [1.5,2] : [2,1.6]
+        }else if device == .pad {
+            return isLandscape ? [1.5,2] : [2,1.6]
+        } else {
+            return isLandscape ? [1.5,2] : [2,1.6]
+        }
+        #endif
+        
+        #if os(macOS)
+        return [2,1.4]
+        #endif
     }
 }
 

@@ -36,6 +36,7 @@ struct TabBarView: View {
                 }
                 #endif
             }
+            .tint(.black)
             .tabViewStyle(.sidebarAdaptable)
             #if os(macOS)
             .toolbarBackground(.clear, for: .windowToolbar)
@@ -43,8 +44,7 @@ struct TabBarView: View {
             .toolbarTitleDisplayMode(.inline)
             .navigationTitle("Home")
         }
-        .background(BackgroundView())
-        .tint(.textColour)
+        
     }
 }
 

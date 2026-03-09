@@ -19,7 +19,7 @@ struct Shadow<Content: View>: View {
     var body: some View {
         content
             // Key shadow styling used across the app
-            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.5 : 0.15),
+            .shadow(color: colorScheme == .dark ? Color.black.opacity(colorScheme == .dark ? 0.5 : 0.15):Color.white.opacity(colorScheme == .dark ? 0.5 : 0.15),
                     radius: colorScheme == .dark ? 12 : 10,
                     x: 0, y: colorScheme == .dark ? 6 : 8)
     }

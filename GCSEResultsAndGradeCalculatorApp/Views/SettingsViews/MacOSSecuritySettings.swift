@@ -14,20 +14,23 @@ struct MacOSSecuritySettingsView: View {
     @State private var biometricAvailable: Bool = false
     @State private var authAlert: (show: Bool, title: String, message: String) = (false, "", "")
     
+    private var lockImage: String {
+        useBiometricAuth ? "lock.fill" : "lock.open.fill"
+    }
+    
     var body: some View {
         #if os(macOS)
         VStack(alignment: .leading) {
             HStack {
                 Text("App Security")
-                    .font(.title2)
+                    .font(.title)
                     .fontWeight(.bold)
                 
-                
-                Image(systemName: "lock.open.fill")
-                    .font(.title2)
-                    .foregroundStyle(.textColour)
+                Image(systemName: lockImage)
+                    .font(.largeTitle)
             }
             .padding(.horizontal, 10)
+            .padding(.top,20)
             
             // Biometric toggle (Touch ID on macOS)
             Toggle(isOn: $useBiometricAuth) {

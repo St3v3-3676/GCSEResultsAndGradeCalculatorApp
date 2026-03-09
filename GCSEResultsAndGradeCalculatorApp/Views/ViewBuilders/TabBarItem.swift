@@ -39,10 +39,13 @@ struct TabBarItem<Content: View>: View {
                         title,
                         systemImage: systemImageName)
                     .frame(maxWidth: .infinity)
+                    .tint(.black)
                         
                 } else if let imageName {
                     Label(title, image: imageName)
+                        .tint(Color(.black))
             }
+                    
         }
     }
 }

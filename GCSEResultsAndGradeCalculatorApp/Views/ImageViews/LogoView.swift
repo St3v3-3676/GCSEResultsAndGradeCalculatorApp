@@ -8,17 +8,33 @@
 import SwiftUI
 
 struct LogoView: View {
-    var isLandscape: Bool
-    var imageWidth: CGFloat
-    var imageHeight: CGFloat
     var body: some View {
-        Image("AppLogo")
-            .resizable()
-            .frame(width: imageWidth, height: imageHeight)
-            .shadow(color: .shadowColour, radius: 50)
+        VStack {
+            Image("AppLogo")
+                .resizable()
+                .frame(width: getLogoSize(), height: getLogoSize(), alignment: .center)
+        }
+    }
+    
+    func getLogoSize() -> CGFloat {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if device == .phone {
+            return 250
+        } else if device == .pad {
+            return 400
+        } else {
+            return 250
+        }
+        #endif
+        
+        #if os(macOS)
+        return 250
+        #endif
     }
 }
 
 #Preview {
-    LogoView(isLandscape: false, imageWidth: 100, imageHeight: 100)
+    LogoView()
 }

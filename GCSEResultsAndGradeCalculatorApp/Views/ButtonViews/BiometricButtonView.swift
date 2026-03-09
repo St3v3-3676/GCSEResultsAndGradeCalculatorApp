@@ -11,8 +11,11 @@ struct BiometricButtonView: View {
     
     let isLandscape: Bool
     let width: CGFloat
-
+    let height: CGFloat
+    
     var body: some View {
+        let biometricButtonScale: [CGFloat] = getBiometricButtonScale(isLandscape: isLandscape)
+        
         ErrorMessage()
         
         StyledButton(
@@ -20,7 +23,8 @@ struct BiometricButtonView: View {
             isLandscape: isLandscape,
             title: authenticationViewModel.biometryLabel,
             buttonImageName: authenticationViewModel.biometryImageName,
-            width: width,
+            width: width * biometricButtonScale[0],
+            height: height * biometricButtonScale[1],
             action: {
                 Task { await authenticationViewModel.attemptUnlock() }
             }
@@ -51,9 +55,25 @@ struct BiometricButtonView: View {
             EmptyView()
         }
     }
+    
+    func getBiometricButtonScale(isLandscape: Bool) -> [CGFloat] {
+        #if os(iOS)
+        let device = UIDevice.current.userInterfaceIdiom
+        
+        if isLandscape && device == .phone {
+            return isLandscape ? [0.4,0.2] : [0.8,2]
+        } else if device == .pad {
+            return isLandscape ? [0.6,0.08] : [0.6,0.06]
+
+        } else {
+            return [2,1]
+        }
+        #endif
+        
+        #if os(macOS)
+        return [2,1]
+        #endif
+    }
 }
 
-#Preview {
-    BiometricButtonView(isLandscape: false, width: 320)
-        .environment(AuthenticationViewModel())
-}
+

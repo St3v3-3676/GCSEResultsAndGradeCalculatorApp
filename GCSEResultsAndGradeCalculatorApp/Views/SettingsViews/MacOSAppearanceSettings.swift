@@ -15,14 +15,14 @@ struct MacOSAppearanceSettingsView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text("App Theme")
-                    .font(.title2)
+                    .font(.title)
                     .fontWeight(.bold)
                 
                 Image(systemName: "paintpalette.fill")
-                    .font(.title2)
-                    .foregroundStyle(.textColour)
+                    .font(.largeTitle)
             }
             .padding(.bottom)
+            .padding(.top, 20)
  
             
             Text("Toggle the apps appearance between \n light and dark mode:")
@@ -30,9 +30,6 @@ struct MacOSAppearanceSettingsView: View {
                 .lineLimit(nil)
                 .padding(.bottom)
 
-
-            
-            
             Picker("",selection: $appColorScheme) {
                 Text("Light").tag("light")
                     .font(.headline)
