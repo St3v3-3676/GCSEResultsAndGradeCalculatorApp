@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A reusable container that applies the app's shadow styling to its content.
-struct Shadow<Content: View>: View {
+struct ShadowView<Content: View>: View {
     @Environment(\.colorScheme) private var colorScheme
     private let content: Content
 
@@ -19,14 +19,14 @@ struct Shadow<Content: View>: View {
     var body: some View {
         content
             // Key shadow styling used across the app
-            .shadow(color: colorScheme == .dark ? Color.black.opacity(colorScheme == .dark ? 0.5 : 0.15):Color.white.opacity(colorScheme == .dark ? 0.5 : 0.15),
-                    radius: colorScheme == .dark ? 12 : 10,
-                    x: 0, y: colorScheme == .dark ? 6 : 8)
+            .shadow(color: Color.indigo,
+                    radius: 10,
+                    x: -10, y:  10)
     }
 }
 
 #Preview("AppShadow") {
-    Shadow {
+    ShadowView {
         RoundedRectangle(cornerRadius: 16)
             .fill(.background)
             .frame(width: 200, height: 120)

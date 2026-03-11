@@ -14,7 +14,7 @@ struct ViewBackground: View {
     private var high: Double { colorScheme == .dark ? 0.18 : 0.60 }
     private var low: Double  { colorScheme == .dark ? 0.01 : 0.008 }
 #elseif os(macOS)
-    private var high: Double { colorScheme == .dark ? 0.8:0.7}
+    private var high: Double { colorScheme == .dark ? 0.2:0.7}
     private var low: Double  { colorScheme == .dark ? 0.0:0.0}
 #endif
     

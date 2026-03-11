@@ -14,24 +14,24 @@ struct TabBarView: View {
         ZStack {
             Spacer()
             TabView {
-                TabBarItem(title: tabTitles[0], systemImage: ViewStringsModel.systemImageName.homeImage) {
+                TabBarItemView(title: tabTitles[0], systemImage: ViewStringsModel.systemImageName.homeImage) {
                     HomeView()
                 }
                 
-                TabBarItem(title: tabTitles[1], imageName: "calculate") {
+                TabBarItemView(title: tabTitles[1], imageName: "calculate") {
                     GradeCalculatorView()
                 }
 
             
-                TabBarItem(title: tabTitles[2], systemImage: ViewStringsModel.systemImageName.gradeBoundariesImage) {
+                TabBarItemView(title: tabTitles[2], systemImage: ViewStringsModel.systemImageName.gradeBoundariesImage) {
                     GradeBoundaryView()
                 }
                 
-                TabBarItem(title: tabTitles[3], systemImage: ViewStringsModel.systemImageName.studentResultsImage) {
+                TabBarItemView(title: tabTitles[3], systemImage: ViewStringsModel.systemImageName.studentResultsImage) {
                     StudentResultsView()
                 }
                 #if os(iOS)
-                TabBarItem(title: tabTitles[4], systemImage: ViewStringsModel.systemImageName.settingsImage) {
+                TabBarItemView(title: tabTitles[4], systemImage: ViewStringsModel.systemImageName.settingsImage) {
                     SettingsView()
                 }
                 #endif
@@ -42,7 +42,6 @@ struct TabBarView: View {
             .toolbarBackground(.clear, for: .windowToolbar)
             #endif
             .toolbarTitleDisplayMode(.inline)
-            .navigationTitle("Home")
         }
         
     }
@@ -51,5 +50,6 @@ struct TabBarView: View {
 #Preview {
     TabBarView()
         .environment(AppSettingsViewModel())
+        .environment(GradeCalculatorViewModel())
 }
 

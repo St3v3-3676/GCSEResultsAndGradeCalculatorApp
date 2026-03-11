@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StyledButton: View {
+struct StyledButtonView: View {
     @Environment(\.colorScheme) private var colorScheme
     
     var buttonLabel: String
@@ -39,7 +39,7 @@ struct StyledButton: View {
         
     }
     var body: some View {
-        Shadow {
+        ShadowView {
             Button(action: action) {
                 buttonLabel(title: title, systemImage: buttonImageName, isLandscape: isLandscape)
             }
@@ -50,7 +50,7 @@ struct StyledButton: View {
     }
 }
 #Preview {
-    StyledButton(
+    StyledButtonView(
         buttonLabel: "Test",
         isLandscape: false,
         title: "Preview",

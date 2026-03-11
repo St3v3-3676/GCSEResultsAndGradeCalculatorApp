@@ -25,12 +25,12 @@ struct TitleView: View {
     
     @ViewBuilder
     func TextTitle(title: String, font: Font) -> some View {
-        Shadow {
+        ShadowView {
             Text(title)
-                .padding(10)
+                .padding(15)
                 .font(font)
                 .foregroundStyle(.foreground)
-                .background(RoundedRectangle(cornerRadius: 10).glassEffect().foregroundStyle(.clear))
+                .background(RoundedRectangle(cornerRadius: 5, style: .continuous).glassEffect().foregroundStyle(.clear))
         }
     }
 }

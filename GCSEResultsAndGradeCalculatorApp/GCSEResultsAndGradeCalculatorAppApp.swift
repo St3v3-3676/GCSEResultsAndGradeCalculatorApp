@@ -11,13 +11,16 @@ import SwiftUI
 struct GCSEResultsAndGradeCalculatorAppApp: App {
     @State private var authenticationViewModel = AuthenticationViewModel()
     @State private var appSettingsViewModel = AppSettingsViewModel()
+    @State private var gradeCalculatorViewModel = GradeCalculatorViewModel()
     @AppStorage("appColorScheme") private var appColorScheme: String = "system"
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .toolbar(.hidden)
                 .environment(authenticationViewModel)
                 .environment(appSettingsViewModel)
+                .environment(gradeCalculatorViewModel)
                 .preferredColorScheme(
                     appColorScheme == "light" ? .light :
                     appColorScheme == "dark" ? .dark : nil

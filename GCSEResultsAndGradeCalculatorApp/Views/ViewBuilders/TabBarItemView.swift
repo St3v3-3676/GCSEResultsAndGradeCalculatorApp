@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabBarItem<Content: View>: View {
+struct TabBarItemView<Content: View>: View {
     let title: String
     let systemImageName: String?
     let imageName: String?
@@ -51,7 +51,7 @@ struct TabBarItem<Content: View>: View {
 }
 
 #Preview {
-    TabBarItem(title: "Results", systemImage: "chart.bar.fill") {
+    TabBarItemView(title: "Results", systemImage: "chart.bar.fill") {
         Text("Results Content")
     }
 }
